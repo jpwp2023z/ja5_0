@@ -10,8 +10,8 @@ Poniższe zadania będą się sprowadzały do modyfikacji bazowego kodu. Proces 
 • W pętli głównej, w main’ie, w zdefiniowanym już try-catch dopisuje się Nazwę wyjątku i go obsługuje, np. wypisuje w konsoli co się stało.
 */
 
-//Commit5_3. Błędny wybór
-//Obsłuż błąd, gdy użytkownik w menu zamiast liczby wpisze coś co nie jest liczbą.
+//Commit5_4. Zmodyfikować metodę Parse w kasie Student.
+//Zamiast tworzyć studenta „Parse Error” w przypadku wykrycia błędu, wyrzucała wyjątek StudentParseError. W metodzie getStudents klasy Service dopisać try-catch, aby obsłużyć ten wyjątek.
 
 import java.io.IOException;
 import java.util.Scanner;

@@ -21,14 +21,19 @@ public class Service {
         var reader = new BufferedReader(f);
         String line = "";
         while (true) {
-            line = reader.readLine();
-            if(line == null)
-                break;
-            ret.add(Student.Parse(line));
+            try{
+                line = reader.readLine();
+                if(line == null)
+                    break;
+                ret.add(Student.Parse(line));
+            } catch(StudentParseError e){
+                System.out.println("Błąd! Niepoprawny format danych.");
+            }
         }
         reader.close();
         return ret;
     }
+  
 
     public Student findStudentByName(String name) throws IOException {
         var students = this.getStudents();
