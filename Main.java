@@ -10,11 +10,15 @@ Poniższe zadania będą się sprowadzały do modyfikacji bazowego kodu. Proces 
 • W pętli głównej, w main’ie, w zdefiniowanym już try-catch dopisuje się Nazwę wyjątku i go obsługuje, np. wypisuje w konsoli co się stało.
 */
 
-//Commit5_1. Na podstawie analogii do wyjątku WrongStudentName utwórz i obsłuż wyjątki WrongAge oraz WrongDateOfBirth. 
-//Niepoprawny wiek – gdy jest mniejszy od 0 lub większy niż 100. Niepoprawna data urodzenia – gdy nie jest zapisana w formacie DD-MM-YYYY, np. 28-02-2023.
+//Commit5_2. Data z użyciem java.text.SimpleDateFormat.
+//Niepoprawna data urodzenia – gdy nie jest zapisana w formacie DD-MM-YYYY, np. 333-333-2000 oraz 33-33-3333.
 
 import java.io.IOException;
 import java.util.Scanner;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 class WrongStudentName extends Exception { }
 class WrongAge extends Exception { }
@@ -73,20 +77,18 @@ class Main {
         return age;
     }
 
-    public static String ReadDate() throws WrongDateOfBirth {
+  public static String ReadDate() throws WrongDateOfBirth{
+         scan.nextLine();
         System.out.println("Podaj datę urodzenia DD-MM-YYYY");
-        String date = scan.next();
-        String[] data = date.split("-");
-        if(data.length != 3)
-            throw new WrongDateOfBirth();
-        if(data[0].length() != 2)
-            throw new WrongDateOfBirth();
-        if(data[1].length() != 2)
-            throw new WrongDateOfBirth();
-        if(data[2].length() != 4)
-            throw new WrongDateOfBirth();
-        return date;
-
+        String date = scan.nextLine();
+       try{
+         DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+         format.setLenient(false);
+         format.parse(date);
+         return date;
+       } catch(ParseException e){
+         throw new WrongDateOfBirth();
+         }
     }
 
     public static void exercise1() throws IOException, WrongStudentName, WrongAge, WrongDateOfBirth {
